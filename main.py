@@ -32,7 +32,7 @@ async def check_dlkey(url, dlkey, is_zip, pbar):
         return [2, dlkey]
 
 async def main():
-    ite = iter_func(lambda x: x, "????", base_str, begin_at=None)
+    ite = iter_func(lambda x: x, "????", base_str, begin_at=begin_at)
     total = ite.__len__()
     with tqdm(total=total) as pbar:
         while True:
@@ -69,4 +69,6 @@ except ValueError:
 base_str = "abcdefghijklmnopqrstuvwxyz"
 base_str += base_str.upper() + "0123456789"
 if input("数字のみ探索しますか?\n英字を探索しない代わりに、探索にかかる時間が約1/1478になります。(y/n)").lower() == "y": base_str = "1234567890"
+begin_at = input("前回エラー終了した場合は、\nここで前回最後に試行していたキーを入力してください。")
+if len(begin_at)!=4: begin_at=None
 asyncio.run(main())
