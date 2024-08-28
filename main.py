@@ -73,9 +73,9 @@ url = input("URLを入力してください(短縮URLはエラー吐きます): 
 print(f"URL: {url}\n")
 is_zip = input("zip(まとめてダウンロード)?初期値n (y/n): ").lower() == "y"
 print("")
-nump = 3
+nump = 2
 try:
-    nump = int(input("同時実行数を入力してください。\n503が頻発する場合この値を下げることをおすすめします。初期値3: "))
+    nump = int(input(f"同時実行数を入力してください。\n503が頻発する場合この値を下げることをおすすめします。初期値{nump}: "))
 except ValueError:
     pass
 print("")
