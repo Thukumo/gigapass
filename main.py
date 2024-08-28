@@ -51,8 +51,8 @@ async def main():
                             return True
                         elif r[0] in [2 , 3]:
                             if r[0] == 3: sleep(0.05)
-                            if (res := await check_dlkey(url, r[1], is_zip, pbar))[0] in [2, 3]: raise RuntimeError(f"2回連続で失敗しました 試行していたキー: {r[1]}")
-                            elif res == 0: return True
+                            if (res := await check_dlkey(url, r[1], is_zip, pbar))[0] in [2, 3]: raise RuntimeError(f"2回連続で失敗しまし{"た(503)" if res[0] == 3 else "た"} 試行していたキー: {r[1]}")
+                            elif res[0] == 0: return True
                 except StopIteration:
                     if len(tmpl) != 0:
                         tasks = [check_dlkey(url, s, is_zip, pbar) for s in tmpl]
@@ -63,8 +63,8 @@ async def main():
                                 return True
                             elif r[0] in [2 , 3]:
                                 if r[0] == 3: sleep(0.05)
-                                if (res := await check_dlkey(url, r[1], is_zip, pbar))[0] in [2, 3]: raise RuntimeError(f"2回連続で失敗しました 試行していたキー: {r[1]}")
-                                elif res == 0: return True
+                                if (res := await check_dlkey(url, r[1], is_zip, pbar))[0] in [2, 3]: raise RuntimeError(f"2回連続で失敗しまし{"た(503)" if res[0] == 3 else "た"} 試行していたキー: {r[1]}")
+                                elif res[0] == 0: return True
                     break
     return False
 
@@ -89,7 +89,7 @@ while roop:
     except RuntimeError as e:
         roop = True
         print(e)
-        sleep(randint(1, 10)/10) #0.1~1秒待機
+        sleep(randint(1, 5))
         print(f'{ str(e).split(" ")[2] }から再試行を開始します...')
         begin_at = str(e).split(" ")[2]
         """
