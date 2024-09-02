@@ -63,13 +63,13 @@ async def main():
                                 return True
                             elif r[0] in [2 , 3]:
                                 if r[0] == 3: sleep(0.05)
-                                if (res := await check_dlkey(url, r[1], is_zip, pbar))[0] in [2, 3]: raise RuntimeError("2回連続で失敗しました"+("(503)" if res[0] == 3 else "(まとめてかの指定を間違えている？)")+f" 試行していたキー: {r[1]}")
+                                if (res := await check_dlkey(url, r[1], is_zip, pbar))[0] in [2, 3]: raise RuntimeError("2回連続で失敗しました"+("(503)" if res[0] == 3 else "(まとめてダウンロードの指定ミス？)")+f" 試行していたキー: {r[1]}")
                                 elif res[0] == 0: return True
                             pbar.update(1)
                     break
     return False
 
-url = input("URLを入力してください(短縮URLはエラー吐きます): ")
+url = input("短縮でないURLを入力してください: ")
 print(f"URL: {url}\n")
 is_zip = input("zip(まとめてダウンロード)?初期値n (y/n): ").lower() == "y"
 print("")
